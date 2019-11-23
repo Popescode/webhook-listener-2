@@ -2,6 +2,13 @@
 
 use Illuminate\Support\Facades\Log;
 
+/**
+ * Validates the webhook signature.
+ *
+ * @param $request
+ *
+ * @return bool
+ */
 function validate_webhook($request) {
     $app_secret = env('GITHUB_SECRET');
     $expected_signature = 'sha1='.hash_hmac('sha1', $request->getContent(), $app_secret, false);
