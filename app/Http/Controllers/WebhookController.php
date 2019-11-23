@@ -10,20 +10,20 @@ class WebhookController extends Controller
     public function repositories(Request $request) {
         $data = $request->json()->all();
 
-        Log::info("The " . $data['repository']['full_name'] . " repo was " . $data['action']);
+        $action = $data['action'];
+        $repo = $data['repository']['name'];
+        $sender = $data['sender']['login'];
+
+        Log::info("Received webhook: $repo repo was $action by $sender");
+
+        $client = github_init_client();
 
         if($data['action'] == 'created') {
-            protect_master_branch($data);
-            notify_sender($data);
+            $owner = $data['repository']['owner']['login'];
+
+            sleep(2);
+            protect_branch($client, $owner, $repo, 'master');
+            notify_sender($client, $owner, $repo, $sender);
         }
-
-    }
-
-    protected function protect_master_branch($data) {
-
-    }
-
-    protected function notify_sender($data) {
-
     }
 }
