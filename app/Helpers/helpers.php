@@ -2,6 +2,26 @@
 
 use Illuminate\Support\Facades\Log;
 
+function validate_webhook($request) {
+    $app_secret = env('GITHUB_SECRET');
+    $expected_signature = 'sha1='.hash_hmac('sha1', $request->getContent(), $app_secret, false);
+
+    $webhook_signature = $request->header('X-Hub-Signature');
+
+
+    if(hash_equals($webhook_signature, $expected_signature)) {
+        Log::info("Webhook signature validated successfully");
+        return true;
+    }
+
+    Log::warning("Received illegal GitHub webhook from " . $request->ip() . ": " .
+        "webhook signature $webhook_signature did not match expected signature $expected_signature");
+
+    abort(500, "Signatures don't match.");
+
+    return false;
+}
+
 /**
  * Creates and returns a GitHub API client instance.
  *

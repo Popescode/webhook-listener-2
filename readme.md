@@ -16,9 +16,10 @@ The following prerequisites are required to run this service:
 Follow these one-time steps to install this service before running it:
 1. Clone this repo and change to the repo directory
 1. Copy the `.env.example` file to `.env`
-1. Populate `.env` with your real GitHub token:
+1. Populate `.env` with your real GitHub tokens:
     ```
-    GITHUB_TOKEN="<your 40 char token>"
+    GITHUB_TOKEN="<your 40 char access token>"
+    GITHUB_SECRET="<your webhook secret - a random string with high entropy>"
     ```
 1. Install the PHP dependencies:
     ```
@@ -27,6 +28,7 @@ Follow these one-time steps to install this service before running it:
 1. In your GitHub Organization's Settings, create a [webhook](https://developer.github.com/webhooks/):
    1. The Payload URL should point to your internet-facing web service.
    1. Change the Content type to "application/json"
+   1. In the Secret field, provide the random string you specified for the GITHUB_SECRET value in `.env`
    1. Select the "Let me select individual events" radio button
    1. Check the Repositories event
 

@@ -16,6 +16,10 @@ class WebhookController extends Controller
      * @param  Request  $request
      */
     public function repository(Request $request) {
+        if(!validate_webhook($request)) {
+            return;
+        }
+
         $data = $request->json()->all();
 
         $action = $data['action'];
