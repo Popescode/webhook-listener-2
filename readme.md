@@ -25,7 +25,7 @@ Follow these one-time steps to install this service before running it:
     composer install
     ```
 1. In your GitHub Organization's Settings, create a [webhook](https://developer.github.com/webhooks/):
-   1. The Payload URL should point to your internet-facing web service.  If you are using a web proxy in front of the service, it should be the internet-accessible URL of that server.  (If you are using ngrok, you'll need to change the Payload URL every time you start ngrok, to the unique Forwarding URL in the ngrok output.)
+   1. The Payload URL should point to your internet-facing web service.
    1. Change the Content type to "application/json"
    1. Select the "Let me select individual events" radio button
    1. Check the Repositories event
