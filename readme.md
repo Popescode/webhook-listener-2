@@ -16,6 +16,11 @@ The following prerequisites are required to run this service:
 Follow these one-time steps to install this service before running it:
 1. Clone this repo and change to the repo directory
 1. Copy the `.env.example` file to `.env`
+1. Give the `.env` file secure permissions (make it readable by the web server), e.g.:
+    ```
+    chgrp apache .env 
+    chmod 640 .env
+    ```
 1. Populate `.env` with your real GitHub tokens:
     ```
     GITHUB_TOKEN="<your 40 char access token>"
