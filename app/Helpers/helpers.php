@@ -63,3 +63,45 @@ function notify_sender($client, $owner, $repo, $sender) {
 
     $client->api('issue')->create($owner, $repo, ['title' => $title, 'body' => $body]);
 }
+
+/**
+ * Checks if a repo has a master branch.
+ *
+ * @param $client
+ * @param $owner
+ * @param $repo
+ *
+ * @return bool
+ */
+function has_master_branch($client, $owner, $repo) {
+    $branches = $client->api('repo')->branches($owner, $repo);
+
+    foreach($branches as $branch) {
+        if($branch['name'] == "master") {
+            Log::info("$owner/$repo repo already has a master branch");
+            return true;
+        }
+    }
+
+    Log::info("$repo repo does not have a master branch");
+    return false;
+}
+
+/**
+ * Creates a readme file in the repo.
+ *
+ * @param $client
+ * @param $owner
+ * @param $repo
+ */
+function create_readme($client, $owner, $repo) {
+    Log::info("Creating a README.md in master branch of $owner/$repo");
+
+    $path = "README.md";
+    $content = "# $repo";
+    $commitMessage = "Initial commit";
+    $branch = "master";
+    $committer = null;
+
+    $client->api('repo')->contents()->create($owner, $repo, $path, $content, $commitMessage, $branch, $committer);
+}

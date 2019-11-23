@@ -29,7 +29,12 @@ class WebhookController extends Controller
         if($data['action'] == 'created') {
             $owner = $data['repository']['owner']['login'];
 
-            sleep(2);
+            sleep(2); // Because sometimes the master branch doesn't exist yet (race condition)
+
+            if(!has_master_branch($client, $owner, $repo)) {
+                create_readme($client, $owner, $repo);
+            }
+
             protect_branch($client, $owner, $repo, 'master');
             notify_sender($client, $owner, $repo, $sender);
         }

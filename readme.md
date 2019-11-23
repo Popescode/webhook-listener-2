@@ -2,7 +2,7 @@
 
 This a simple PHP-based web service that listens for organization events to know when a repository has been created.  When the repository is created, it automatically protects the master branch, and notifies the creator with an @mention in an issue within the repository that outlines the protections that were added.
 
-**Note:** New repositories should be initialized with a README, otherwise there will be no master branch yet.
+New repositories will automatically be initialized with a README as needed, if there is no master branch yet.
 
 # Requirements
 The following prerequisites are required to run this service:
@@ -32,8 +32,6 @@ Follow these one-time steps to install this service before running it:
 
 # Usage
 As long as your web server is running and internet-accessible, no further steps are necessary. The service will now listen for the organization event webhooks.
-
-**Note:** New repositories should be initialized with a README.
 
 # Resources
 The following resources were used in the creation of this service:
