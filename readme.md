@@ -1,6 +1,6 @@
 # webhook-listener - solution #2
 
-This a simple PHP-based web service that listens for organization events to know when a repository has been created.  When the repository is created, it automatically protects the master branch, and notifies the creator with an @mention in an issue within the repository that outlines the protections that were added.
+This is a simple PHP-based web service that listens for organization events to know when a repository has been created.  When the repository is created, it automatically protects the master branch, and notifies the creator with an @mention in an issue within the repository that outlines the protections that were added.
 
 New repositories will automatically be initialized with a README as needed, if there is no master branch yet.
 
