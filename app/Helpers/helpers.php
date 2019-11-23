@@ -103,5 +103,7 @@ function create_readme($client, $owner, $repo) {
     $branch = "master";
     $committer = null;
 
-    $client->api('repo')->contents()->create($owner, $repo, $path, $content, $commitMessage, $branch, $committer);
+    $client->api('repo')
+        ->contents()
+        ->create($owner, $repo, $path, $content, $commitMessage, $branch, $committer);
 }
