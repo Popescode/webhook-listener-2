@@ -47,3 +47,4 @@ The following resources were used in the creation of this service:
 * GitHub's [webhook tutorial](https://developer.github.com/webhooks/)
 * GitHub's [REST API Documentation](https://developer.github.com/v3/)
 * [Lumen](https://lumen.laravel.com), a PHP micro-framework based on [Laravel](https://laravel.com)
+* [KnpLabs/php-github-api](https://github.com/KnpLabs/php-github-api/tree/master/doc), a PHP client for the GitHub API
