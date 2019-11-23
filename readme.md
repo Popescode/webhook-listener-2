@@ -4,6 +4,8 @@ This a simple PHP-based web service that listens for organization events to know
 
 New repositories will automatically be initialized with a README as needed, if there is no master branch yet.
 
+Webhooks are [validated for security](https://developer.github.com/webhooks/securing/).
+
 # Requirements
 The following prerequisites are required to run this service:
 * PHP >= 7.2
@@ -43,5 +45,5 @@ As long as your web server is running and internet-accessible, no further steps 
 # Resources
 The following resources were used in the creation of this service:
 * GitHub's [webhook tutorial](https://developer.github.com/webhooks/)
-* GitHub's [REST API Documentation](https://developer.github.com/v3/), especially the section on [Branches](https://developer.github.com/v3/repos/branches/)
-* [Lumen](https://lumen.laravel.com), a PHP micro-framework based on [Laravel](https://laravel.com).
+* GitHub's [REST API Documentation](https://developer.github.com/v3/)
+* [Lumen](https://lumen.laravel.com), a PHP micro-framework based on [Laravel](https://laravel.com)
