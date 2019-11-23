@@ -87,7 +87,7 @@ function notify_sender($client, $owner, $repo, $sender) {
         "  * Dismiss stale pull request approvals when new commits are pushed\n" .
         "  * Require review from Code Owners\n" .
         "* Enforce above restrictions for administrators\n\n" .
-        "Opened by Solution #2";
+        "Opened by Solution 2";
 
     $client->api('issue')->create($owner, $repo, ['title' => $title, 'body' => $body]);
 }
