@@ -1,21 +1,42 @@
-# Lumen PHP Framework
+# webhook-listener - solution #2
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+This a simple PHP-based web service that listens for organization events to know when a repository has been created.  When the repository is created, it automatically protects the master branch, and notifies the creator with an @mention in an issue within the repository that outlines the protections that were added.
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+**Note:** New repositories should be initialized with a README, otherwise there will be no master branch yet.
 
-## Official Documentation
+# Requirements
+The following prerequisites are required to run this service:
+* PHP >= 7.2
+* [Composer](https://getcomposer.org)
+* An Organization in GitHub
+* An [access token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) on your GitHub account
+* A web server, e.g. Apache or Nginx, configured to pass requests to Lumen/Laravel.  For examples, see [Laravel Nginx configuration](https://laravel.com/docs/6.x/deployment#nginx)
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+# Installation
+Follow these one-time steps to install this service before running it:
+1. Clone this repo and change to the repo directory
+1. Copy the `.env.example` file to `.env`
+1. Populate `.env` with your real GitHub token:
+    ```
+    GITHUB_TOKEN="<your 40 char token>"
+    ```
+1. Install the PHP dependencies:
+    ```
+    composer install
+    ```
+1. In your GitHub Organization's Settings, create a [webhook](https://developer.github.com/webhooks/):
+   1. The Payload URL should point to your internet-facing web service.  If you are using a web proxy in front of the service, it should be the internet-accessible URL of that server.  (If you are using ngrok, you'll need to change the Payload URL every time you start ngrok, to the unique Forwarding URL in the ngrok output.)
+   1. Change the Content type to "application/json"
+   1. Select the "Let me select individual events" radio button
+   1. Check the Repositories event
 
-## Security Vulnerabilities
+# Usage
+As long as your web server is running and internet-accessible, no further steps are necessary. The service will now listen for the organization event webhooks.
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+**Note:** New repositories should be initialized with a README.
 
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Resources
+The following resources were used in the creation of this service:
+* GitHub's [webhook tutorial](https://developer.github.com/webhooks/)
+* GitHub's [REST API Documentation](https://developer.github.com/v3/), especially the section on [Branches](https://developer.github.com/v3/repos/branches/)
+* [Lumen](https://lumen.laravel.com), a PHP micro-framework based on [Laravel](https://laravel.com).
