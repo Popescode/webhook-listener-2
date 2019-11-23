@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Log;
 */
 
 //$router->post('/webhooks/repositories', 'WebhookController@repositories');
-$router->post('/', 'WebhookController@repositories');
+$router->post('/', 'WebhookController@repository');
