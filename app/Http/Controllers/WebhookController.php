@@ -7,6 +7,14 @@ use Illuminate\Support\Facades\Log;
 
 class WebhookController extends Controller
 {
+    /**
+     * Handles 'repository' webhook events. On new repository creation,
+     * adds protections to master branch and creates an issue in the
+     * repo to notify sender, via GitHub API.  Creates a master branch
+     * if not present by pushing a Readme file.
+     *
+     * @param  Request  $request
+     */
     public function repositories(Request $request) {
         $data = $request->json()->all();
 

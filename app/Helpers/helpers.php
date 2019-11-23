@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Log;
 
+/**
+ * Creates and returns a GitHub API client instance.
+ *
+ * @return \Github\Client
+ */
 function github_init_client() {
     $client = new \Github\Client();
     $client->authenticate(env('GITHUB_TOKEN'), null, Github\Client::AUTH_HTTP_TOKEN);
@@ -9,6 +14,14 @@ function github_init_client() {
     return $client;
 }
 
+/**
+ * Adds protections to a specified branch.
+ *
+ * @param $client
+ * @param $owner
+ * @param $repo
+ * @param $branch
+ */
 function protect_branch($client, $owner, $repo, $branch) {
     Log::info("Adding protections to $branch branch of $owner/$repo");
 
@@ -28,6 +41,15 @@ function protect_branch($client, $owner, $repo, $branch) {
     $protection = $client->api('repo')->protection()->update($owner, $repo, $branch, $params);
 }
 
+/**
+ * Notifies the sender/creator of added protections by
+ * creating an issue in the repo with an @mention.
+ *
+ * @param $client
+ * @param $owner
+ * @param $repo
+ * @param $sender
+ */
 function notify_sender($client, $owner, $repo, $sender) {
     Log::info("Notifying sender $sender of protections by opening an issue in $owner/$repo");
 
